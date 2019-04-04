@@ -6,8 +6,11 @@ const path = require('path');
 const app = express();
 
 const {getHomePage} = require('./routes/index');
-const {addEventPage, addEvent, addMEvent, addMEventPage} = require('./routes/event');
-const port = 5000;
+const {addEventPage, addEvent, addMEvent, addMEventPage, viewPage} = require('./routes/event');
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 
 // create connection to database
 // the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
@@ -40,10 +43,14 @@ app.use(fileUpload()); // configure fileupload
 app.get('/', getHomePage);
 app.get('/add', addEventPage);
 app.get('/addm', addMEventPage);
-// app.get('/delete/:id', deletePlayer);
+app.get('/view', viewPage);
 app.post('/add', addEvent);
 app.post('/addm', addMEvent);
+app.get('/view', viewPage);
 // */
+
+//Folder to host static css and js files
+app.use('/static', express.static('static'))
 
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
