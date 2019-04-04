@@ -9,7 +9,7 @@ const {getHomePage} = require('./routes/index');
 const {addEventPage, addEvent, addMEvent, addMEventPage, viewPage} = require('./routes/event');
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 8000;
+  port = 5000;
 }
 
 // create connection to database
