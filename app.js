@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
+var pgp = require('pg')(/*options*/)
+var conString = pgp('postgres://harysahvkammdn:a7dc71f97a7f9851700835c167d356c8096f44904e5909636174f0dc1d13a576@ec2-54-243-241-62.compute-1.amazonaws.com:5432/desh872b3drhd3')
 
 const {getHomePage} = require('./routes/index');
 const {addEventPage, addEvent, addMEvent, addMEventPage, viewPage} = require('./routes/event');
@@ -12,22 +14,9 @@ if (port == null || port == "") {
   port = 5000;
 }
 
-// create connection to database
-// the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
-const db = mysql.createConnection ({
-    host: 'localhost',
-    user: 'root',
-    password: 'hansel23',
-    database: 'timeline-database-1'
-});
-
 // connect to database
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('Connected to database');
-});
+var db = new pg.Client(conString);
+db.connect();
 global.db = db;
 
 // configure middleware
