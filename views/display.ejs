@@ -25,17 +25,20 @@
             </thead>
             
             <tbody>
-                <%events.forEach((event, index) => { %>
+            <% for(var d=0;d<events.length;d++)
+                                    {  %>
                 <tr>
-                    <td><%= event.title %> </td>
+                    <td><%= events[d].title %> </td>
                     <td></td>
-                    <td><%= event.date %> </td>
-                    <td><%= event.end_date %> </td>
+                    <td><%= events[d].date %> </td>
+                    <td><%= events[d].end_date %> </td>
 
                 </tr>
-                <% }) %>
+                <% } 
+                %>
             </tbody>
         </table>
     </div>
+    <%console.log(x);%>
 </body>
 </html>

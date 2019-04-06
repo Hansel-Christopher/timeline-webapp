@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
-var pgp = require('pg')(/*options*/)
-var conString = pgp('postgres://harysahvkammdn:a7dc71f97a7f9851700835c167d356c8096f44904e5909636174f0dc1d13a576@ec2-54-243-241-62.compute-1.amazonaws.com:5432/desh872b3drhd3')
+var pg = require('pg')
+var conString = 'postgres://harysahvkammdn:a7dc71f97a7f9851700835c167d356c8096f44904e5909636174f0dc1d13a576@ec2-54-243-241-62.compute-1.amazonaws.com:5432/desh872b3drhd3?ssl=true';
 
 const {getHomePage} = require('./routes/index');
 const {addEventPage, addEvent, addMEvent, addMEventPage, viewPage} = require('./routes/event');

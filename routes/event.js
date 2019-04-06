@@ -8,7 +8,7 @@ module.exports = {
     addEvent: (req, res) => {
         let title = req.body.title;
         let date = req.body.date;
-        let eventQuery = "SELECT * FROM `events` WHERE title = '" + title + "'";
+        let eventQuery = "SELECT * FROM events WHERE title = '" + title + "'";
 
         db.query(eventQuery, (err, result) => {
             if (err) {
@@ -20,7 +20,7 @@ module.exports = {
                     message
                 });
             } else {
-                let query = "INSERT INTO `events` (title, date) VALUES ('" +
+                let query = "INSERT INTO events (title, date) VALUES ('" +
                             title + "', '" + date + "')";
                         db.query(query, (err, result) => {
                             if (err) {
@@ -39,7 +39,7 @@ module.exports = {
         let title = req.body.title;
         let date = req.body.sdate;
         let edate = req.body.edate;
-        let eventQuery = "SELECT * FROM `events` WHERE title = '" + title + "'";
+        let eventQuery = "SELECT * FROM events WHERE title = '" + title + "'";
 
         db.query(eventQuery, (err, result) => {
             if (err) {
@@ -51,7 +51,7 @@ module.exports = {
                     message
                 });
             } else {
-                let query = "INSERT INTO `events` (title, date, end_date) VALUES ('" +
+                let query = "INSERT INTO events (title, date, end_date) VALUES ('" +
                             title + "', '"+ date + "', '" + edate + "')";
                         db.query(query, (err, result) => {
                             if (err) {
@@ -64,15 +64,15 @@ module.exports = {
     },
     viewPage:(req, res) => {
 
-        let query = "SELECT * FROM `events` ORDER BY id ASC";
+        let query = "SELECT * FROM events";
         db.query(query, (err, result) => {
             if (err) {
                 res.redirect('/');
             }
+            view_data = JSON.parse(result);
             res.render('display.ejs', {
-                events:result
+                events:view_data
             });
-        
         });
     }
 
