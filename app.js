@@ -1,12 +1,12 @@
 // import dependencies
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import logger from 'morgan';
+var express = require('express');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var logger = require('morgan.logger');
 // set up dependencies
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.urlencoded({ extended: true });
 app.use(logger('dev'));
 // set up mongoose
 mongoose.connect('mongodb://localhost/projectsupport')
