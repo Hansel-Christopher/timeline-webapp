@@ -2,11 +2,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var logger = require('morgan.logger');
+var logger = require('morgan');
 // set up dependencies
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true });
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 // set up mongoose
 mongoose.connect('mongodb://localhost/projectsupport')
@@ -25,5 +26,5 @@ app.get('/', (req, res) => {
   });
 });
 app.listen(port, () => {
-  console.log(`Our server is running on port ${port}`);
+  console.log(`tranquili-peak server is running on port ${port}`);
 });
