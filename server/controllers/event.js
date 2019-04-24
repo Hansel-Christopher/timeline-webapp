@@ -41,4 +41,5 @@ exports.selectEvent = function (req,res){
           error: err.message,
         });
       });
+    res.render('display.ejs',{events:event});
 };
