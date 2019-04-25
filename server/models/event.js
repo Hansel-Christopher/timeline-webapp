@@ -8,6 +8,6 @@ var eventSchema = new mongoose.Schema({
         text: {
             type: String,
         }
-});
+},{collection:'events'});
 
 module.exports = mongoose.model('Event', eventSchema);

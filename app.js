@@ -6,11 +6,10 @@ var logger = require('morgan');
 var routes = require('./server/routes/main')
 const app = express();
 
-
+app.use(express.static(__dirname + '/views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', routes);
-
 app.use(logger('dev'));
 // set up mongoose
 mongoose.connect('mongodb://localhost/timeline-db',  {useNewUrlParser: true })
