@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Timeline</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/display.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="display.css" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
 </head>
@@ -16,14 +16,37 @@
     <div class="cover">
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
-      <div id='timeline-embed' style="width: 100%; height: 600px"></div>
+    <div id='timeline-embed' style="width: 100%; height: 600px"></div>
+      
+    <script type="text/javascript">
+        var additionalOptions = {
+                start_at_end: false,
+                timenav_height: 200,
+                debug:true,
+                initial_zoom: 5,
+                }
+        var sevents = <%- JSON.stringify(event) %>;
+        var timeline_json = {
+            events:[]
+        };
+        console.log((sevents[0].start_date).toString().substring(8,10));
+        for(var i in sevents) {
+            var item = sevents[i];   
+            timeline_json.events.push({ 
+                start_date : new Date((item.start_date).toString().substring(0,4),(item.start_date).toString().substring(6,7)-1,(item.start_date).toString().substring(8,10)),
+                text  : {
+                    headline: item.headline,
+                    text: item.text
+                },
+                media : {
+                    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpK4bQyzmfXx6J1lMUERRIHeFQCrT9LynBdkM0Wb5kGaCLnzMm",
+                }
+    });
 
-      <script type="text/javascript">
-      var event = <%- JSON.stringify(events)%>;
-        // optionally, a third argument with configuration options can be passed.
-        // See below for more about options.
-        timeline = new TL.Timeline('timeline-embed',event);
-        console.log(event);
+        }
+        console.log(timeline_json);
+        window.timeline = new TL.Timeline('timeline-embed', timeline_json, additionalOptions)
+
       </script>
     </div>
 </body>

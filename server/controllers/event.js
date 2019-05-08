@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var eventModel = require('../models/event');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost/timeline-db";
+var event;
 
 exports.createEvent = function(req,res){
     var event = new eventModel(req.body);
@@ -20,27 +23,15 @@ exports.createEvent = function(req,res){
     });
 };
 
-exports.selectEvent = function (req,res){
-  event = eventModel.find().exec()
-        // .select('_id start_date text').then( (allEvent) => {
-        //   return res.status(200).json({
-        //     success: true,
-        //     message: 'A list of all events',
-        //     event: allEvent,
-        //   });
-      // })
-    
-    .catch((err) => {
-        res.status(500).json({
-          success: false,
-          message: 'Server error. Please try again.',
-          error: err.message,
-        });
-      });
-      return event;
-  // var cursor = eventModel.collection('events').find().toArray(function(err, results) {
-  //   console.log(results)
-  //   // send HTML file populated with quotes here
-  // })
-  
-    };
+exports.selectEvent = async function (req,res){
+  MongoClient.connect(url, { useNewUrlParser: true }  ,function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("timeline-db");
+    dbo.collection("events").find({}, { projection: { _id: 0, start_date : 1, text: 1}}).toArray(function(err, result) {
+    if (err) throw err;
+    event =result;
+    console.log(event);
+  });
+ });
+ return event;
+}

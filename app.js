@@ -27,6 +27,8 @@ app.get('/', (req, res) => {
     message: 'Welcome to Project Timeline',
   });
 });
+
+app.use(express.static('public/css'));
 app.listen(port, () => {
   console.log(`tranquili-peak server is running on port ${port}`);
 });

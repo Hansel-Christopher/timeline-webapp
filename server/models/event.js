@@ -3,7 +3,7 @@ mongoose.Promise = global.Promise;
 
 var eventSchema = new mongoose.Schema({
         start_date: {
-            type:  String,
+            type:  Date,
         },
         text: {
             type: String,
