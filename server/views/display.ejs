@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="jumbotron" id="j1">
-        <h1>Timeline App</h1>
+        <h1>Chronology</h1>
     </div>
     <div class="cover">
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
@@ -29,7 +29,7 @@
         var timeline_json = {
             events:[]
         };
-        console.log((sevents[0].start_date).toString().substring(8,10));
+        console.log(sevents[0]);
         for(var i in sevents) {
             var item = sevents[i];   
             timeline_json.events.push({ 
@@ -39,7 +39,7 @@
                     text: item.text
                 },
                 media : {
-                    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpK4bQyzmfXx6J1lMUERRIHeFQCrT9LynBdkM0Wb5kGaCLnzMm",
+                    url: item.url,
                 }
     });
 

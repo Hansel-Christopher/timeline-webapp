@@ -7,7 +7,14 @@ var eventSchema = new mongoose.Schema({
         },
         text: {
             type: String,
+        },
+        headline: {
+            type: String,
+        },
+        url: {
+            type: String,
         }
+
 },{collection:'events'});
 
 module.exports = mongoose.model('Event', eventSchema);

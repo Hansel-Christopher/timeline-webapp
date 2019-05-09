@@ -23,15 +23,3 @@ exports.createEvent = function(req,res){
     });
 };
 
-exports.selectEvent = async function (req,res){
-  MongoClient.connect(url, { useNewUrlParser: true }  ,function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("timeline-db");
-    dbo.collection("events").find({}, { projection: { _id: 0, start_date : 1, text: 1}}).toArray(function(err, result) {
-    if (err) throw err;
-    event =result;
-    console.log(event);
-  });
- });
- return event;
-}
