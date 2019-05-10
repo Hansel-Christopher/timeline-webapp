@@ -23,10 +23,8 @@ mongoose.connect("mongodb://localhost:27017/timeline-db",  {useNewUrlParser: tru
     console.log('Error connecting to database');
   });
 
-app.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'Welcome to Project Timeline',
-  });
+app.get('/*', (req, res) => {
+  res.send("Hello World!");
 });
 
 app.use(express.static('public/css'));
