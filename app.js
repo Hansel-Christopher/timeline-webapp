@@ -32,5 +32,5 @@ app.listen(process.env.PORT || 8081, (err) => {
   if (err) {
     console.log(err);
   }
-  console.log(`tranquili-peak server is running on port ${port}`);
+  console.log(`tranquili-peak server is running on port `||process.env.PORT);
 });
