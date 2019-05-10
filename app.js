@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', routes);
 app.use(logger('dev'));
 
-mongoose.connect(isDev ? config.db_dev : config.db,  {useNewUrlParser: true })
+mongoose.connect("mongodb://localhost:27017/timeline-db",  {useNewUrlParser: true })
   .then(()=> {
     console.log('Database connected');
   })
