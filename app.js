@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', routes);
 app.use(logger('dev'));
 
-mongoose.connect('mongodb://localhost/timeline-db',  {useNewUrlParser: true })
+mongoose.connect(isDev ? config.db_dev : config.db,  {useNewUrlParser: true })
   .then(()=> {
     console.log('Database connected');
   })
@@ -27,6 +27,9 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.static('public/css'));
-app.listen(port, () => {
+app.listen(port, (err) => {
+  if (err) {
+    console.log(err);
+  }
   console.log(`tranquili-peak server is running on port ${port}`);
 });
