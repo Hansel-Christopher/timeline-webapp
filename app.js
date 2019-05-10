@@ -5,6 +5,9 @@ var mongoose = require('mongoose');
 var logger = require('morgan');
 var routes = require('./server/routes/main')
 const app = express();
+const config = require('../config/config');
+const isDev = process.env.NODE_ENV !== 'production';
+const port  = process.env.PORT || 5035;
 
 app.use(express.static(__dirname + '/views'));
 app.use(bodyParser.json());
@@ -19,7 +22,7 @@ mongoose.connect(isDev ? config.db_dev : config.db,  {useNewUrlParser: true })
   .catch((error)=> {
     console.log('Error connecting to database');
   });
-const port = 5035;
+  
 app.get('/', (req, res) => {
   res.status(200).json({
     message: 'Welcome to Project Timeline',
