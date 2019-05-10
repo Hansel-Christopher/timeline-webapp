@@ -28,7 +28,7 @@ app.get('/*', (req, res) => {
 });
 
 app.use(express.static('public/css'));
-app.listen(port, (err) => {
+app.listen(port.env.PORT || 8081, (err) => {
   if (err) {
     console.log(err);
   }
