@@ -7,7 +7,7 @@ var routes = require('./server/routes/main')
 const app = express();
 const config = require('./config/config');
 const isDev = process.env.NODE_ENV !== 'production';
-const port  = 3000;
+const port  = 8080;
 
 app.use(express.static(__dirname + '/views'));
 app.use(bodyParser.json());
@@ -32,5 +32,5 @@ app.listen(port, (err) => {
   if (err) {
     console.log(err);
   }
-  console.log(`tranquili-peak server is running on port 3000`);
+  console.log(`tranquili-peak server is running on port 8080`);
 });
