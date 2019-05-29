@@ -2,9 +2,10 @@
   "name": "timline-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "server": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,12 +18,23 @@
   },
   "homepage": "https://github.com/Hansel-Christopher/timeline-webapp#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "antd": "^3.18.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.5.2",
+    "mongoose": "^5.5.11",
     "morgan": "^1.9.1",
-    "path": "^0.12.7"
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "path": "^0.12.7",
+    "validator": "^11.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
   }
 }

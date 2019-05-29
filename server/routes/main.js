@@ -4,13 +4,17 @@ var controller = require('../controllers/event.js');
 var createEvent = controller.createEvent;
 var selectEvent = controller.selectEvent;
 var path = require('path');
-var eventModel = require('../models/event');
+
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost/timeline-db";
-var event;
+var url = require("../config/config").mongoURI;
+
+const User = require("../models/user");
 
 router.get('/', (req,res)=>{
-    res.sendFile(path.join(__dirname,'../views/index.html'));
+    res.sendFile(path.join(__dirname,'public/index.html'));
+})
+router.get('/single', (req,res)=>{
+  res.sendFile(path.join(__dirname,'public/single.html'));
 })
 router.get('/view',    function (req,res){
     MongoClient.connect(url, { useNewUrlParser: true }  ,function(err, db) {
