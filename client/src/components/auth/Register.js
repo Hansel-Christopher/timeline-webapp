@@ -149,7 +149,7 @@ class Register extends Component{
           <Button type="primary" htmlType="submit">
             Register
           </Button>
-          Or <a href="/login"> login now!</a>
+          &nbsp;Or <a href="/login"> login now!</a>
         </Form.Item>
             </Form>
             </Col>

@@ -5,7 +5,6 @@ import './index.css';
 
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
-
 import Login from "./components/auth/Login";
 
 class App extends Component{

@@ -20,9 +20,9 @@ class Login extends React.Component {
     
     return (
         <Row >
-<Col span={12} offset={9}>
+<Col>
         
-<h4 style={{textAlign:"justify"}}><b>Login   </b> below!</h4>
+<h4 style={{textAlign:"center"}}><b>Login   </b> below!</h4>
       <Form onSubmit={this.handleSubmit} className="login-form">
         <Form.Item>
           {getFieldDecorator('username', {
@@ -56,7 +56,7 @@ class Login extends React.Component {
           <Button type="primary" htmlType="submit" className="login-form-button" style={{width: 100}}>
             Log in
           </Button>
-          Or <a href="/register">register now!</a>
+          &nbsp;Or <a href="/register">register now!</a>
         </Form.Item>
       </Form>
       </Col>
