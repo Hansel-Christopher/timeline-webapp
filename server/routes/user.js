@@ -8,6 +8,32 @@ const keys = require("../config/config");
 const opts = {};
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
+const passport = require('passport');
+const passportSetup = require("../config/passport");
+
+router.get(
+  "/google",
+   passport.authenticate("google", { scope: ["profile", "email"] })
+);
+router.get(
+  "/google/callback",
+  passport.authenticate('google', {
+    successRedirect : 'http://localhost:3000/profile',
+    failureRedirect : '/fail'
+  })
+);
+
+router.get(
+  "/facebook",
+  passport.authenticate("facebook")  
+);
+router.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", { failureRedirect: "/", session: false }),
+  function(req, res) {
+    res.send("Logged in");
+}
+);
 
 router.post("/register", (req, res) => {
     // Form validation
@@ -25,7 +51,6 @@ router.post("/register", (req, res) => {
           email: req.body.email,
           password: req.body.password
         });
-  // Hash password before saving in database
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
@@ -87,4 +112,4 @@ router.post("/register", (req, res) => {
     });
   });
 
-  module.exports = router;
+module.exports = router;

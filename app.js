@@ -8,18 +8,25 @@ const app = express();
 const isDev = process.env.NODE_ENV !== 'production';
 const port  = 8080;
 const passport = require("passport");
-
+const passportSetup = require("./server/config/passport");
+const cookieSession = require('cookie-session');
 
 app.use(express.static('client/build'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', mainroutes);
-app.use("/api/users", userroutes);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/',mainroutes);
+app.use("/auth", userroutes);
 
 app.use(logger('dev'));
-app.use(passport.initialize());
-require("./server/config/passport")(passport);
+
+app.use(cookieSession({
+  maxAge : 24 * 60 * 60 * 100,
+  keys : ["random"]
+}))
 
 const db = require("./server/config/config").mongoURI;
 

@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import {Icon} from 'antd';
+
 import {
     Form,
     Input,
@@ -18,7 +23,7 @@ class Register extends Component{
         confirmDirty: false,
         autoCompleteResult: [],
       };
-    
+  
       handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -26,6 +31,13 @@ class Register extends Component{
             console.log('Received values of form: ', values);
           }
         });
+        const newUser = {
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+          password2: this.state.confirm
+          };
+        this.props.registerUser(newUser, this.props.history); 
       };
     
       handleConfirmBlur = e => {
@@ -65,17 +77,20 @@ class Register extends Component{
         },
         };
         const tailFormItemLayout = {
+        
         wrapperCol: {
             xs: {
             span: 24,
             offset: 0,
             },
             sm: {
-            span: 11,
-            offset: 1,
+            span: 16,
+            offset: 5,
             },
         },
         };
+
+        
 
         const prefixSelector = getFieldDecorator('prefix', {
         initialValue: '86',
@@ -94,7 +109,7 @@ class Register extends Component{
             <Row >
     <Col span={12} offset={6}>
             <h4 style={{textAlign:"center"}}><b>Register</b> below!</h4>
-            <Form {...formItemLayout} onSubmit={this.handleSubmit} style={{textAlign:"center"}}> 
+            <Form {...formItemLayout} onSubmit={this.handleSubmit} style={{textAlign:"left"}}> 
             <Form.Item label="Name">
             {getFieldDecorator('name', {
                 rules: [
@@ -149,7 +164,8 @@ class Register extends Component{
           <Button type="primary" htmlType="submit">
             Register
           </Button>
-          &nbsp;Or <a href="/login"> login now!</a>
+          &nbsp;
+        <a href="http://localhost:8080/auth/google"><Button><Icon type="google" />Sign in with Google</Button></a>&nbsp;<a href="http://localhost:8080/auth/facebook"><Button><Icon type="facebook" />Sign in with Facebook</Button></a>&nbsp;or <a href="/login"> login now!</a>
         </Form.Item>
             </Form>
             </Col>
